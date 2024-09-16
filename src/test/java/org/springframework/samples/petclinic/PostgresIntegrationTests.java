@@ -79,15 +79,15 @@ public class PostgresIntegrationTests {
 
 	@Test
 	void testFindAll() throws Exception {
-		// vets.findAll();
-		// vets.findAll(); // served from cache
+		vets.findAll();
+		vets.findAll(); // served from cache
 	}
 
 	@Test
 	void testOwnerDetails() {
-		// RestTemplate template = builder.rootUri("http://localhost:" + port).build();
-		// ResponseEntity<String> result = template.exchange(RequestEntity.get("/owners/1").build(), String.class);
-		// assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
+		RestTemplate template = builder.rootUri("http://localhost:" + port).build();
+		ResponseEntity<String> result = template.exchange(RequestEntity.get("/owners/1").build(), String.class);
+		assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
 	}
 
 	static class PropertiesLogger implements ApplicationListener<ApplicationPreparedEvent> {
