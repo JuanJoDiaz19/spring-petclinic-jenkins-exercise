@@ -25,7 +25,7 @@ pipeline {
                         unstash 'source'
                         sh 'mvn spring-javaformat:apply'
                         sh "mvn clean install -DskipTests=true"
-                        sh 'mvn test'
+                        sh './mvnw clean test -Dspring.profiles.active=postgres'
                         junit '**/target/surefire-reports/*.xml'
                         stash includes: '**', name: 'built'
                     }
@@ -46,8 +46,6 @@ pipeline {
                 unstash 'built'
                 unstash 'javadoc'
 
-                unstash 'built'
-                unstash 'javadoc'
                 sh 'docker compose up --build -d'
                 sh 'sleep 30'
                 //TODO: how to run integration tests in gradle or in the project
