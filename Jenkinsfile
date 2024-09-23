@@ -26,7 +26,7 @@ pipeline {
                         sh 'mvn spring-javaformat:apply'
                         sh "mvn clean install -DskipTests=true"
                         sh 'mvn test'
-                        junit '**/build/test-results/test/*.xml'
+                        junit '**/target/surefire-reports/*.xml'
                         stash includes: '**', name: 'built'
                     }
                 }
