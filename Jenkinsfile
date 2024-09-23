@@ -52,8 +52,8 @@ pipeline {
                 sh 'sleep 30'
                 //TODO: how to run integration tests in gradle or in the project
                 sh 'mvn test -Dtest=*IntegrationTests'
-                
-                junit '**/target/failsafe-reports/*.xml'
+
+                junit '**/target/surefire-reports/*IntegrationTest*.xml'
                 // Aquí irían los pasos para desplegar tu aplicación en Docker, etc.
             }
         }
