@@ -48,7 +48,8 @@ pipeline {
 
                 unstash 'built'
                 unstash 'javadoc'
-                sh 'docker compose up --build'
+                sh 'docker compose up --build -d'
+                sh 'sleep 30'
                 sh './gradlew integrationTest'
                 junit '**/target/failsafe-reports/*.xml'
                 // Aquí irían los pasos para desplegar tu aplicación en Docker, etc.
