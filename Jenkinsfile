@@ -10,8 +10,11 @@ pipeline {
     stages {
         
         stage('Preparation') {
-            checkout scm
-            stash includes: '**', name: 'source'
+            agent {label 'agent1'}
+            steps {
+                checkout scm
+                stash includes: '**', name: 'source'
+            }
         }
         
         stage('Build y Javadoc'){
@@ -37,7 +40,6 @@ pipeline {
                 }
             }
             
-            agent{ label 'agent1'}
             
         }
     }
