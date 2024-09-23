@@ -51,7 +51,8 @@ pipeline {
                 sh 'docker compose up --build -d'
                 sh 'sleep 30'
                 //TODO: how to run integration tests in gradle or in the project
-                sh './gradlew integrationTest'
+                sh 'mvn test -Dtest=*IntegrationTests'
+                
                 junit '**/target/failsafe-reports/*.xml'
                 // Aquí irían los pasos para desplegar tu aplicación en Docker, etc.
             }
