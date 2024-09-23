@@ -39,8 +39,20 @@ pipeline {
                     }
                 }
             }
-            
-            
+        }
+        stage('Deploy') {
+            agent { label 'agent2' }
+            steps {
+                unstash 'built'
+                unstash 'javadoc'
+
+                unstash 'built'
+                unstash 'javadoc'
+                sh 'docker compose up --build'
+                sh './gradlew integrationTest'
+                junit '**/target/failsafe-reports/*.xml'
+                // Aquí irían los pasos para desplegar tu aplicación en Docker, etc.
+            }
         }
     }
 }
